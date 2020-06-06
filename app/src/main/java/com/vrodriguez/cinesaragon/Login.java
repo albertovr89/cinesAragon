@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import com.vrodriguez.cinesaragon.modelos.Persona;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
@@ -98,16 +99,13 @@ public class Login extends AppCompatActivity {
                             public void run() {
                                 try{
                                     JSONObject json = new JSONObject(miRespuesta);
-                                    String estado = json.getString("ok");
-                                    if(estado.equalsIgnoreCase("true")) {
-                                        Intent logintent = new Intent(Login.this, Menu.class);
-                                        startActivityForResult(logintent, 0);
-                                    } else {
-                                        String motivo = json.getString("reason");
-                                        Toast.makeText(getApplicationContext(), "Error:"+motivo, Toast.LENGTH_SHORT).show();
-                                    }
+                                    Persona p = Persona.fromJSON(json);
 
-                                }catch (JSONException e){
+                                    Intent logintent = new Intent(Login.this, Menu.class);
+                                    startActivityForResult(logintent, 0);
+                                } catch (IllegalArgumentException error) {
+                                    Toast.makeText(getApplicationContext(), "Error:"+ error.getMessage(), Toast.LENGTH_SHORT).show();
+                                } catch (JSONException e){
                                     e.printStackTrace();
                                 }
                             }
