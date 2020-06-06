@@ -1,45 +1,34 @@
 package com.vrodriguez.cinesaragon;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
-
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.vrodriguez.cinesaragon.apis.LoginClient;
 import com.vrodriguez.cinesaragon.modelos.Persona;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcels;
 
 import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.FormBody;
-import okhttp3.HttpUrl;
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
 
 public class Login extends AppCompatActivity {
 
+    private LoginClient loginClient;
     private EditText usuariotxt, passtxt;
-    String url = "http://192.168.1.129/cinesAragon/loginCine.php";
-    public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +39,9 @@ public class Login extends AppCompatActivity {
         passtxt = findViewById(R.id.passtxt);
         Button btnlogin = findViewById(R.id.btnlogin);
 
+        OkHttpClient httpClient = new OkHttpClient();
+        loginClient = new LoginClient(httpClient);
+
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,33 +49,7 @@ public class Login extends AppCompatActivity {
                 String user = usuariotxt.getText().toString();
                 String pass = passtxt.getText().toString();
 
-                final String postUrl = "http://192.168.1.129/cinesAragon/loginCine.php";
-
-                try {
-                    postLogin(postUrl,user,pass);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-            }
-
-
-
-            void postLogin (String postUrl, String user, String pass) throws IOException {
-
-                OkHttpClient client = new OkHttpClient();
-
-                RequestBody formBody = new FormBody.Builder()
-                        .add("usuario", user)
-                        .add("pass", pass)
-                        .build();
-
-                Request request = new Request.Builder()
-                        .url(postUrl)
-                        .post(formBody)
-                        .build();
-
-                client.newCall(request).enqueue(new Callback() {
+                loginClient.login(user, pass, new Callback() {
                     @Override
                     public void onFailure(@NotNull Call call, @NotNull IOException e) {
                         call.cancel();
@@ -97,15 +63,14 @@ public class Login extends AppCompatActivity {
                         Login.this.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                try{
+                                try {
                                     JSONObject json = new JSONObject(miRespuesta);
                                     Persona p = Persona.fromJSON(json);
 
-                                    Intent logintent = new Intent(Login.this, Menu.class);
-                                    startActivityForResult(logintent, 0);
+                                    irAMenu(p);
                                 } catch (IllegalArgumentException error) {
-                                    Toast.makeText(getApplicationContext(), "Error:"+ error.getMessage(), Toast.LENGTH_SHORT).show();
-                                } catch (JSONException e){
+                                    Toast.makeText(getApplicationContext(), "Error:" + error.getMessage(), Toast.LENGTH_SHORT).show();
+                                } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
                             }
@@ -114,9 +79,16 @@ public class Login extends AppCompatActivity {
 
                     }
                 });
+
             }
         });
 
+    }
+
+    protected void irAMenu(Persona p) {
+        Intent logintent = new Intent(Login.this, Menu.class);
+        logintent.putExtra("persona", Parcels.wrap(p));
+        startActivityForResult(logintent, 0);
     }
 }
 
