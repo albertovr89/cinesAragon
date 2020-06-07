@@ -1,37 +1,47 @@
 package com.vrodriguez.cinesaragon.modelos;
 
-import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.parceler.Parcel;
+
+import java.util.ArrayList;
 
 @Parcel
 public class Persona {
     /*
     {
-        "id": "1",
-        "usuario": "alberto",
-        "telefono": "954334432",
-        "correo": "aksj@gmail.com",
-        "tarjeta": "12485796",
-        "ok": true
+      "id": "1",
+      "usuario": "alberto",
+      "nombre": "",
+      "apellidos": "",
+      "telefono": "954334432",
+      "correo": "aksj@gmail.com",
+      "fecha": "0000-00-00",
+      "tarjeta": "12485796",
+      "ok": true
     }
     */
     private Long id;
     private String usuario;
+    private String nombre;
+    private String apellidos;
     private String telefono;
     private String tarjeta;
     private String correo;
+    private String fecha;
     private boolean ok;
 
     public Persona() {}
 
-    public Persona(Long id, String usuario, String telefono, String tarjeta, String correo) {
+    public Persona(Long id, String usuario, String nombre, String apellidos, String telefono, String tarjeta, String correo, String fecha) {
         this.id = id;
         this.usuario = usuario;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
         this.telefono = telefono;
         this.tarjeta = tarjeta;
         this.correo = correo;
+        this.fecha = fecha;
     }
 
     public Long getId() {
@@ -48,6 +58,22 @@ public class Persona {
 
     public void setUsuario(String usuario) {
         this.usuario = usuario;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 
     public String getTelefono() {
@@ -74,6 +100,14 @@ public class Persona {
         this.correo = correo;
     }
 
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
     public static Persona fromJSON(JSONObject json) throws IllegalArgumentException, JSONException {
         if (!json.getBoolean("ok")) {
             String reason = json.getString("reason");
@@ -83,8 +117,12 @@ public class Persona {
         return new Persona(
                 json.getLong("id"),
                 json.getString("usuario"),
+                json.getString("nombre"),
+                json.getString("apellidos"),
                 json.getString("telefono"),
                 json.getString("tarjeta"),
-                json.getString("correo"));
+                json.getString("correo"),
+                json.getString("fecha"));
     }
+
 }

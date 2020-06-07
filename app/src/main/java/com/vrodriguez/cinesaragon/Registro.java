@@ -3,106 +3,122 @@ package com.vrodriguez.cinesaragon;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-import com.vrodriguez.cinesaragon.Constantes.Constantes;
+import com.vrodriguez.cinesaragon.apis.RegisterClient;
+import com.vrodriguez.cinesaragon.modelos.Persona;
 
+import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcels;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Response;
 
 
-public class Registro extends AppCompatActivity implements Response.Listener<JSONObject>, Response.ErrorListener {
+public class Registro extends AppCompatActivity  {
 
-    EditText nombre, contrasena, telefono, mail, tarjeta;
+    EditText usuario, contrasena, nombre, apellidos, telefono, correo, fecha,  tarjeta;
+    Button btnregistro;
+    private RegisterClient registerClient;
 
-    RequestQueue request;
-    JsonObjectRequest jsonObjectRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
 
-        nombre = findViewById(R.id.nombretxt);
+        usuario = findViewById(R.id.usertxt);
         contrasena = findViewById(R.id.passtxt);
+        nombre = findViewById(R.id.nombretxt);
+        apellidos = findViewById(R.id.apelltxt);
         telefono = findViewById(R.id.tlfntxt);
-        mail = findViewById(R.id.mailtxt);
+        correo = findViewById(R.id.mailtxt);
+        fecha = findViewById(R.id.fechatxt);
         tarjeta = findViewById(R.id.tarjetatxt);
+        btnregistro = findViewById(R.id.btnregistro);
 
-        request= Volley.newRequestQueue(this);
-        
+
+        OkHttpClient httpClient = new OkHttpClient();
+        registerClient = new RegisterClient(httpClient);
+
+        btnregistro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String user = usuario.getText().toString();
+                String pass = contrasena.getText().toString();
+                String name = nombre.getText().toString();
+                String surname = apellidos.getText().toString();
+                String phone = telefono.getText().toString();
+                String mail = correo.getText().toString();
+                String date = fecha.getText().toString();
+                String card = tarjeta.getText().toString();
+
+                registerClient.registro(user, pass, name, surname, phone, mail, date, card, new Callback() {
+                    @Override
+                    public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                        call.cancel();
+                    }
+
+                    @Override
+                    public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+
+                        final String miRespuesta = response.body().string();
+
+                        Registro.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    JSONObject json = new JSONObject(miRespuesta);
+                                    Persona p = Persona.fromJSON(json);
+                                    vaciarCampos();
+                                    irAMenu(p);
+                                } catch (IllegalArgumentException error) {
+                                    Toast.makeText(getApplicationContext(), "Error:" + error.getMessage(), Toast.LENGTH_SHORT).show();
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+
+
+                    }
+                });
+
+            }
+        });
 
     }
 
-    public void registrar (View view) {
-        cargarwebservice();
-        
-        //registrarUsuario();
-        //Intent vuelta = new Intent(Registro.this, MainActivity.class);
-        //startActivityForResult(vuelta,0);
+    protected void irAMenu(Persona p) {
+        Intent regintent = new Intent(Registro.this, Menu.class);
+        regintent.putExtra("persona", Parcels.wrap(p));
+        startActivityForResult(regintent, 0);
     }
 
-    private void cargarwebservice() {
-
-        String url = "http://192.168.1.133:4278/cinesAragon/registroJSON.php?nombre="+nombre.getText().toString()+
-                "&contrasena="+contrasena.getText().toString()+"&telefono="+telefono.getText().toString()+
-                "&correo="+mail.getText().toString()+"&tarjeta="+tarjeta.getText().toString();
-
-
-        url = url.replace(" ","%20");
-
-
-        jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,url,null,this,this);
-        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(Constantes.MY_DEFAULT_TIMEOUT, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        request.add(jsonObjectRequest);
-    }
-/*
-    private void registrarUsuario (){
-
-        ConexionSQLiteHelper conn = new ConexionSQLiteHelper(this,"bd_usuarios", null, 1);
-
-        SQLiteDatabase db = conn.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(Constantes.CAMPO_NOMBRE, nombre.getText().toString());
-        values.put(Constantes.CAMPO_CONTRASENA, contrasena.getText().toString());
-        values.put(Constantes.CAMPO_TELEFONO, telefono.getText().toString());
-        values.put(Constantes.CAMPO_MAIL, mail.getText().toString());
-        values.put(Constantes.CAMPO_TARJETA, tarjeta.getText().toString());
-
-        long idResultante = db.insert(Constantes.TABLA_USUARIO, Constantes.CAMPO_NOMBRE, values);
-
-        Toast.makeText(getApplicationContext(),"Id de Registro: "+idResultante, Toast.LENGTH_SHORT).show();
-        db.close();
-    }*/
-
-    @Override
-    public void onErrorResponse(VolleyError error) {
-
-        Toast.makeText(getBaseContext(),"No se pudo registrar"+error.toString(), Toast.LENGTH_SHORT).show();
-        Log.i("ERROR",error.toString());
-    }
-
-    @Override
-    public void onResponse(JSONObject response) {
-
-        Toast.makeText(getBaseContext(),"Usuario registrado correctamente", Toast.LENGTH_SHORT).show();
-
-        nombre.setText("");
+    public void vaciarCampos() {
+        usuario.setText("");
         contrasena.setText("");
+        nombre.setText("");
+        apellidos.setText("");
         telefono.setText("");
-        mail.setText("");
+        correo.setText("");
+        fecha.setText("");
         tarjeta.setText("");
-
     }
+
+
+
+
 }

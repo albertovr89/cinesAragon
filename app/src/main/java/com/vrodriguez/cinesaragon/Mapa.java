@@ -20,6 +20,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.parceler.Parcels;
+
 public class Mapa extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private static final int LOCATION_REQUEST_CODE = 1;
@@ -67,10 +69,10 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, Google
         // Add a marker in Sydney and move the camera
         markerHuesca = mMap.addMarker(new MarkerOptions().position(cineHuesca).title("Cine Mundo").icon(BitmapDescriptorFactory.fromResource(R.mipmap.marcadorcine)));
         markerTeruel = mMap.addMarker(new MarkerOptions().position(cineTeruel).title("Cine Maravilla").icon(BitmapDescriptorFactory.fromResource(R.mipmap.marcadorcine)));
-        markerVenecia= mMap.addMarker(new MarkerOptions().position(cineVenecia).title("Cine Puerto Venecia").icon(BitmapDescriptorFactory.fromResource(R.mipmap.marcadorcine)));
-        markerAragonia= mMap.addMarker(new MarkerOptions().position(cineAragonia).title("Cine Aragonia").icon(BitmapDescriptorFactory.fromResource(R.mipmap.marcadorcine)));
-        markerCasa= mMap.addMarker(new MarkerOptions().position(cineCasa).title("Cine Gran Casa").icon(BitmapDescriptorFactory.fromResource(R.mipmap.marcadorcine)));
-        markerYelmo= mMap.addMarker(new MarkerOptions().position(cineYelmo).title("Cine Yelmo").icon(BitmapDescriptorFactory.fromResource(R.mipmap.marcadorcine)));
+        markerVenecia = mMap.addMarker(new MarkerOptions().position(cineVenecia).title("Cine Puerto Venecia").icon(BitmapDescriptorFactory.fromResource(R.mipmap.marcadorcine)));
+        markerAragonia = mMap.addMarker(new MarkerOptions().position(cineAragonia).title("Cine Aragonia").icon(BitmapDescriptorFactory.fromResource(R.mipmap.marcadorcine)));
+        markerCasa = mMap.addMarker(new MarkerOptions().position(cineCasa).title("Cine Gran Casa").icon(BitmapDescriptorFactory.fromResource(R.mipmap.marcadorcine)));
+        markerYelmo = mMap.addMarker(new MarkerOptions().position(cineYelmo).title("Cine Yelmo").icon(BitmapDescriptorFactory.fromResource(R.mipmap.marcadorcine)));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(cineVenecia));
     }
 
@@ -82,6 +84,16 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, Google
             if (permissions.length > 0 &&
                     permissions[0].equals(Manifest.permission.ACCESS_FINE_LOCATION) &&
                     grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return;
+                }
                 mMap.setMyLocationEnabled(true);
             } else {
                 Toast.makeText(this, "Error de permisos", Toast.LENGTH_LONG).show();
@@ -96,30 +108,33 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, Google
 
 
         if (marker.equals(markerHuesca)) {
-            Intent cine = new Intent (Mapa.this, Cines.class);
-            cine.putExtra("id",1);
-            startActivity(cine);
+            String id = "1";
+            irACine(id);
         } else if (marker.equals(markerTeruel)) {
-            Intent cine = new Intent (Mapa.this, Cines.class);
-            cine.putExtra("id", 2);
-            startActivity(cine);
+            String id = "2";
+            irACine(id);
         } else if (marker.equals(markerVenecia)) {
-            Intent cine = new Intent (Mapa.this, Cines.class);
-            cine.putExtra("id", 3);
-            startActivity(cine);
+            String id = "3";
+            irACine(id);
         } else if (marker.equals(markerAragonia)) {
-            Intent cine = new Intent (Mapa.this, Cines.class);
-            cine.putExtra("id", 4);
-            startActivity(cine);
+            String id = "4";
+            irACine(id);
         } else if (marker.equals(markerCasa)) {
-            Intent cine = new Intent (Mapa.this, Cines.class);
-            cine.putExtra("id", 5);
-            startActivity(cine);
+            String id = "5";
+            irACine(id);
         } else if (marker.equals(markerYelmo)) {
-            Intent cine = new Intent (Mapa.this, Cines.class);
-            cine.putExtra("id", 6);
-            startActivity(cine);
+            String id = "6";
+            irACine(id);
+ //           Intent cine = new Intent (Mapa.this, Cines.class);
+   //         cine.putExtra("id", 6);
+     //       startActivity(cine);
         }
         return false;
+    }
+
+    protected void irACine(String id) {
+        Intent cineintent = new Intent(Mapa.this, Cines.class);
+        cineintent.putExtra("id", id);
+        startActivityForResult(cineintent, 0);
     }
 }

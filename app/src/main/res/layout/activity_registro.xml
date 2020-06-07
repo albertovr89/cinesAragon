@@ -39,7 +39,53 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
-                android:text="Nombre de usuario"
+                android:text="Nombre de usuario: "
+                android:textColor="@android:color/background_dark"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/usertxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:ems="10"
+                android:hint="*campo obligatorio*"
+                android:inputType="textPersonName"
+                android:textColor="@android:color/background_dark" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="8dp"
+                android:text="Contraseña: "
+                android:textColor="@android:color/background_dark"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/passtxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:ems="10"
+                android:hint="*campo obligatorio*"
+                android:inputType="textPassword"
+                android:textColor="@android:color/background_dark" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="8dp"
+                android:text="Nombre: "
                 android:textColor="@android:color/background_dark"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -56,18 +102,18 @@
                 android:textColor="@android:color/background_dark" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/textView14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="8dp"
-                android:text="Contraseña"
+                android:text="Apellidos: "
                 android:textColor="@android:color/background_dark"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/passtxt"
+                android:id="@+id/apelltxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -83,7 +129,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="14dp"
-                android:text="Teléfono"
+                android:text="Teléfono: "
                 android:textColor="@android:color/background_dark"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -96,7 +142,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:textColor="@android:color/background_dark" />
 
             <TextView
@@ -105,7 +151,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="23dp"
-                android:text="Correo electrónico"
+                android:text="Correo electrónico: "
                 android:textColor="@android:color/background_dark"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -122,12 +168,34 @@
                 android:textColor="@android:color/background_dark" />
 
             <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="23dp"
+                android:text="Fecha de nacimiento: "
+                android:textColor="@android:color/background_dark"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/fechatxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:ems="10"
+                android:inputType="date"
+                android:textColor="@android:color/background_dark" />
+
+            <TextView
                 android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="15dp"
-                android:text="Nº de tarjeta bancaria"
+                android:text="Nº de tarjeta bancaria: "
                 android:textColor="@android:color/background_dark"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -144,7 +212,7 @@
                 android:textColor="@android:color/background_dark" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btnregistro"
                 android:layout_width="144dp"
                 android:layout_height="51dp"
                 android:layout_gravity="center"
