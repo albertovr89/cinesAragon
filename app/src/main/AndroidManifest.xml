@@ -17,7 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Cartelera"></activity>
+        <activity android:name=".DetallePeli"></activity>
+        <activity android:name=".Cartelera" />
         <activity android:name=".Menu" />
         <activity android:name=".Cines" />
         <!--

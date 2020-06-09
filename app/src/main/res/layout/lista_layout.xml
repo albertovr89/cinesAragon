@@ -1,38 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp"
-    >
+    android:orientation="horizontal"
+    android:padding="10dp">
 
     <ImageView
         android:id="@+id/portada"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        app:srcCompat="@mipmap/marcadorcine" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:adjustViewBounds="true"
+        android:maxWidth="150dp"
+        android:maxHeight="300dp"
+        android:scaleType="fitCenter" />
 
     <TextView
         android:id="@+id/titulotxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="TextView" />
+        android:layout_alignTop="@id/portada"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/portada"
+        android:text="Titulo" />
 
     <TextView
         android:id="@+id/generotxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="TextView" />
+        android:layout_below="@id/titulotxt"
+        android:layout_alignStart="@id/titulotxt"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:text="Genero" />
 
     <TextView
         android:id="@+id/clasitxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="TextView" />
-</LinearLayout>
+        android:layout_below="@id/generotxt"
+        android:layout_alignStart="@id/titulotxt"
+        android:text="Clasificacion" />
+</RelativeLayout>

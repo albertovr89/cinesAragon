@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -54,6 +55,9 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, Google
         }
 
         mMap.getUiSettings().setZoomControlsEnabled(true);
+
+        //Zoom a la zona del mapa
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(17.0f));
 
         googleMap.setOnMarkerClickListener(this);
         //Marcadores

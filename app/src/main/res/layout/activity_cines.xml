@@ -1,95 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Cines"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Cines">
+    android:orientation="vertical">
 
-    <LinearLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/titulotxt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
 
         <ImageView
             android:id="@+id/fotoCine"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/cines2" />
+            android:layout_height="200dp" />
+
+        <TextView
+            android:id="@+id/titulotxt"
+            android:layout_width="match_parent"
+            android:layout_height="25dp" />
 
         <TextView
             android:id="@+id/direccion"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="25dp"
             android:text="TextView" />
 
         <TextView
             android:id="@+id/telefono"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="25dp"
             android:text="TextView" />
 
         <TextView
             android:id="@+id/mail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="25dp"
             android:text="TextView" />
 
         <TextView
             android:id="@+id/web"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="25dp"
             android:text="TextView" />
 
         <TextView
             android:id="@+id/cartelera"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:text="cartelera" />
 
-        <TableLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvportadas"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TableRow
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/peli1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/cines2" />
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/peli2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/cines2" />
-            </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                        <ImageView
+                            android:id="@+id/peli1"
+                            android:layout_width="175dp"
+                            android:layout_height="175dp"
+                            app:srcCompat="@drawable/cines2" />
 
-                <ImageView
-                    android:id="@+id/peli3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/cines2" />
+                        <ImageView
+                            android:id="@+id/peli2"
+                            android:layout_width="175dp"
+                            android:layout_height="175dp"
+                            app:srcCompat="@drawable/cines2" />
+                    </TableRow>
 
-                <ImageView
-                    android:id="@+id/peli4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/cines2" />
-            </TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-        </TableLayout>
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+                        <ImageView
+                            android:id="@+id/peli3"
+                            android:layout_width="175dp"
+                            android:layout_height="175dp"
+                            app:srcCompat="@drawable/cines2" />
+
+                        <ImageView
+                            android:id="@+id/peli4"
+                            android:layout_width="175dp"
+                            android:layout_height="175dp"
+                            app:srcCompat="@drawable/cines2" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/peli5"
+                            android:layout_width="175dp"
+                            android:layout_height="175dp"
+                            app:srcCompat="@drawable/cines2" />
+
+                        <ImageView
+                            android:id="@+id/peli6"
+                            android:layout_width="175dp"
+                            android:layout_height="175dp"
+                            app:srcCompat="@drawable/cines2" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/peli7"
+                            android:layout_width="175dp"
+                            android:layout_height="175dp"
+                            app:srcCompat="@drawable/cines2" />
+
+                        <ImageView
+                            android:id="@+id/peli8"
+                            android:layout_width="175dp"
+                            android:layout_height="175dp"
+                            app:srcCompat="@drawable/cines2" />
+                    </TableRow>
+                </TableLayout>
+            </LinearLayout>
+        </ScrollView>
+</LinearLayout>

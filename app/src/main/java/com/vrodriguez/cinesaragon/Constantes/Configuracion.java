@@ -5,5 +5,6 @@ public class Configuracion {
     public static final String FUNCION_LOGIN = "loginCine.php";
     public static final String FUNCION_REGISTER = "registroJSON.php";
     public static final String FUNCION_EXTRAER = "obtenerDb.php";
+    public static final String FUNCION_SACAR_IMAGEN_PELI = "obtenerPelis.php";
 
 }

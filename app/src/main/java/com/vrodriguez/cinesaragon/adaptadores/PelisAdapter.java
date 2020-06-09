@@ -1,30 +1,35 @@
 package com.vrodriguez.cinesaragon.adaptadores;
 
 import android.content.Context;
-import android.media.Image;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+import com.vrodriguez.cinesaragon.DetallePeli;
 import com.vrodriguez.cinesaragon.R;
 import com.vrodriguez.cinesaragon.modelos.Pelicula;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PelisAdapter extends RecyclerView.Adapter<PelisAdapter.ViewHolder> implements Filterable {
+public class PelisAdapter extends RecyclerView.Adapter<PelisAdapter.ViewHolder> implements View.OnClickListener {
 
     private ArrayList<Pelicula> persons;
     private ArrayList<Pelicula> personsFilter;
-    private FiltroCustom mFilter;
+    private Context context;
+
+//Recoger un click ???
+    private View.OnClickListener listener;
+
+
+
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -42,10 +47,14 @@ public class PelisAdapter extends RecyclerView.Adapter<PelisAdapter.ViewHolder> 
     }
 
     private List<Pelicula> mPelicula;
-    public PelisAdapter(List<Pelicula> peliculas) {
-        mPelicula = peliculas;
+    public PelisAdapter(Context context, List<Pelicula> peliculas) {
+        this.mPelicula = peliculas;
+        this.context = context;
     }
 
+    public PelisAdapter (Context context){
+        this.context = context;
+    }
 
     @NonNull
     @Override
@@ -56,13 +65,18 @@ public class PelisAdapter extends RecyclerView.Adapter<PelisAdapter.ViewHolder> 
 
         View pelisView = inflater.inflate(R.layout.lista_layout, parent, false);
         ViewHolder viewHolder = new ViewHolder(pelisView);
+
+        //Recoger un click
+        pelisView.setOnClickListener(this);
+        //
+
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull PelisAdapter.ViewHolder viewHolder, int position) {
 
-        Pelicula pelicula = mPelicula.get(position);
+        final Pelicula pelicula = mPelicula.get(position);
 
         TextView titulo = viewHolder.titulo;
         titulo.setText(pelicula.getTitulo());
@@ -72,8 +86,19 @@ public class PelisAdapter extends RecyclerView.Adapter<PelisAdapter.ViewHolder> 
         clasi.setText(pelicula.getClasi());
 
         ImageView portada = viewHolder.portada;
-        portada
+        Picasso.get().load(pelicula.getImagen()).placeholder(R.drawable.cines2).into(portada);
 
+        //recoger un click
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent pelintent = new Intent(context, DetallePeli.class);
+                pelintent.putExtra("id", pelicula.getId().toString());
+                context.startActivity(pelintent);
+            }
+        });
+
+        ///
     }
 
     @Override
@@ -81,36 +106,14 @@ public class PelisAdapter extends RecyclerView.Adapter<PelisAdapter.ViewHolder> 
         return mPelicula.size();
     }
 
-    public class FiltroCustom extends Filter {
-         private ListAdapter listAdapter;
+//recoger un click???
 
-         private FiltroCustom(ListAdapter listAdapter) {
-             super();
-             this.listAdapter = listAdapter;
-         }
-
-        @Override
-        protected FilterResult hacerfiltro(CharSequence constraint) {
-             personsFilter.clear();
-             final FilterResults results = new FilterResults();
-             if(constraint.length() == 0) {
-                 personsFilter.addAll(mPelicula);
-             } else {
-                 final String filterPattern = constraint.toString().toLowerCase().trim();
-                 for(final Pelicula pelicula:mPelicula) {
-                     if(pelicula.getGenero().toLowerCase().contains(filterPattern)) {
-                         personsFilter.add(pelicula)
-                     }
-                 }
-             }
-             results.values = personsFilter;
-             results.count = personsFilter.size();
-             return results;
-         }
-
-         @Override
-        protected void publishResults(CharSequence constraint, FilterResults results){
-             this.listAdapter.notifyDataSetChanged();
-         }
+    public void setOnClickListener(View.OnClickListener listener){
+        this.listener = listener;
     }
+    @Override
+    public void onClick(View v) {
+        if(listener != null) listener.onClick(v);
+    }
+    //
 }

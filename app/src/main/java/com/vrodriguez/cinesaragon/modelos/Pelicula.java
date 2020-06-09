@@ -81,12 +81,7 @@ public class Pelicula {
         return sesion4;
     }
 
-    public Pelicula fromJSON(JSONObject json) throws IllegalArgumentException, JSONException {
-        if (!json.getBoolean("ok")) {
-            String reason = json.getString("reason");
-            throw new IllegalArgumentException(reason);
-        }
-
+    public static Pelicula fromJSON(JSONObject json) throws IllegalArgumentException, JSONException {
         return new Pelicula(
                 json.getLong("id"),
                 json.getString("titulo"),
@@ -94,25 +89,11 @@ public class Pelicula {
                 json.getString("imagen"),
                 json.getString("genero"),
                 json.getString("clasi"),
-                json.getLong("estrellas"),
+                5l/*json.getLong("estrellas")*/,
                 json.getString("sesion1"),
                 json.getString("sesion2"),
                 json.getString("sesion3"),
                 json.getString("sesion4"));
-    }
-
-    public Pelicula(JSONObject jsonObject) throws JSONException {
-        this.id = jsonObject.getLong("id");
-        this.titulo = jsonObject.getString("titulo");
-        this.sinopsis = jsonObject.getString("sinopsis");
-        this.imagen = jsonObject.getString("imagen");
-        this.genero = jsonObject.getString("genero");
-        this.clasi = jsonObject.getString("clasi");
-        this.estrellas = jsonObject.getLong("estrellas");
-        this.sesion1 = jsonObject.getString("sesion1");
-        this.sesion2 = jsonObject.getString("sesion2");
-        this.sesion3 = jsonObject.getString("sesion3");
-        this.sesion4 = jsonObject.getString("sesion4");
     }
 
     public static ArrayList<Pelicula> fromJSONArray(JSONArray array) {
@@ -120,7 +101,7 @@ public class Pelicula {
 
         for (int i = 0; i < array.length(); i++) {
             try{
-                resultado.add(new Pelicula(array.getJSONObject(i)));
+                resultado.add(Pelicula.fromJSON(array.getJSONObject(i)));
             } catch (JSONException e) {
                 e.printStackTrace();
             }

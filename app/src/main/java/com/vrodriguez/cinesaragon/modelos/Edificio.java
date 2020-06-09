@@ -38,13 +38,14 @@ public class Edificio {
     private String peli6;
     private String peli7;
     private String peli8;
+    private String imagen;
     private boolean ok;
 
 
     public Edificio() {
     }
 
-    public Edificio(long id, String nombre, String direccion, String telefono, String correo, String peli1, String peli2, String peli3, String peli4, String peli5, String peli6, String peli7, String peli8) {
+    public Edificio(long id, String nombre, String direccion, String telefono, String correo, String peli1, String peli2, String peli3, String peli4, String peli5, String peli6, String peli7, String peli8, String imagen) {
         this.id = id;
         this.nombre = nombre;
         this.direccion = direccion;
@@ -58,6 +59,7 @@ public class Edificio {
         this.peli6 = peli6;
         this.peli7 = peli7;
         this.peli8 = peli8;
+        this.imagen = imagen;
     }
 
     public Long getId() {
@@ -164,6 +166,14 @@ public class Edificio {
         this.peli8 = peli8;
     }
 
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
     public static Edificio fromJSON(JSONObject json) throws IllegalArgumentException, JSONException {
         if (!json.getBoolean("ok")) {
             String reason = json.getString("reason");
@@ -183,6 +193,7 @@ public class Edificio {
                 json.getString("peli5"),
                 json.getString("peli6"),
                 json.getString("peli7"),
-                json.getString("peli8"));
+                json.getString("peli8"),
+                json.getString("imagen"));
     }
 }

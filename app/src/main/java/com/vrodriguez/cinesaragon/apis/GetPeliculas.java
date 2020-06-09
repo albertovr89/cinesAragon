@@ -8,21 +8,20 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
-public class GetCines {
+public class GetPeliculas {
 
     private OkHttpClient client;
 
-    public GetCines(OkHttpClient client) {
+    public GetPeliculas(OkHttpClient client) {
         this.client = client;
     }
 
 
-    public void pedirCines(String tabla, String id, Callback cb) {
+    public void pedirPelis(String tabla, Callback cb) {
         OkHttpClient client = new OkHttpClient();
 
         RequestBody formBody = new FormBody.Builder()
                 .add("objeto", tabla)
-                .add("id", id)
                 .build();
 
         Request request = new Request.Builder()
@@ -33,11 +32,11 @@ public class GetCines {
         client.newCall(request).enqueue(cb);
     }
 
-    public void pedirPelis(String id, Callback cb){
+    public void pedirPelis2(String idCine, Callback cb) {
         OkHttpClient client = new OkHttpClient();
 
         RequestBody formBody = new FormBody.Builder()
-                .add("id", id)
+                .add("id", idCine)
                 .build();
 
         Request request = new Request.Builder()
