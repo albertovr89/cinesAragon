@@ -38,9 +38,14 @@
 
         <activity
             android:name=".Mapa"
+            android:parentActivityName=".MainActivity"
             android:label="@string/title_activity_mapa" />
-        <activity android:name=".Registro" />
-        <activity android:name=".Login" />
+        <activity
+            android:name=".Registro"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".Login"
+            android:parentActivityName=".MainActivity"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

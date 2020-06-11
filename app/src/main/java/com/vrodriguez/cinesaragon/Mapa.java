@@ -1,6 +1,7 @@
 package com.vrodriguez.cinesaragon;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -10,6 +11,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -23,16 +25,20 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.parceler.Parcels;
 
-public class Mapa extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+public class Mapa extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private static final int LOCATION_REQUEST_CODE = 1;
     private GoogleMap mMap;
-    private Marker markerHuesca, markerTeruel, markerVenecia, markerAragonia, markerCasa, markerYelmo;
+    private Marker markerHuesca, markerTeruel, markerVenecia, markerAragonia, markerCasa, markerYelmo, markerPalafox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mapa);
+
+        Toolbar toolbar = findViewById(R.id.toolbarmapa);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Cines Cercanos");
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -57,7 +63,12 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, Google
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
         //Zoom a la zona del mapa
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(17.0f));
+    //funciona    mMap.animateCamera(CameraUpdateFactory.zoomTo(17.0f));
+
+        //Exp
+        float zoomlvl = 7.5f;
+        LatLng centro = new LatLng(41.608, -0.884);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(centro,zoomlvl));
 
         googleMap.setOnMarkerClickListener(this);
         //Marcadores
@@ -69,6 +80,7 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, Google
         LatLng cineAragonia = new LatLng(41.639, -0.908);
         LatLng cineCasa = new LatLng(41.670, -0.890);
         LatLng cineYelmo = new LatLng(41.641, -1.015);
+        LatLng cinePalafox = new LatLng(41.651, -0.882);
 
         // Add a marker in Sydney and move the camera
         markerHuesca = mMap.addMarker(new MarkerOptions().position(cineHuesca).title("Cine Mundo").icon(BitmapDescriptorFactory.fromResource(R.mipmap.marcadorcine)));
@@ -77,6 +89,7 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, Google
         markerAragonia = mMap.addMarker(new MarkerOptions().position(cineAragonia).title("Cine Aragonia").icon(BitmapDescriptorFactory.fromResource(R.mipmap.marcadorcine)));
         markerCasa = mMap.addMarker(new MarkerOptions().position(cineCasa).title("Cine Gran Casa").icon(BitmapDescriptorFactory.fromResource(R.mipmap.marcadorcine)));
         markerYelmo = mMap.addMarker(new MarkerOptions().position(cineYelmo).title("Cine Yelmo").icon(BitmapDescriptorFactory.fromResource(R.mipmap.marcadorcine)));
+        markerPalafox = mMap.addMarker(new MarkerOptions().position(cinePalafox).title("Cine Palafox").icon(BitmapDescriptorFactory.fromResource(R.mipmap.marcadorcine)));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(cineVenecia));
     }
 
@@ -109,8 +122,6 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, Google
     @Override
     public boolean onMarkerClick(Marker marker) {
 
-
-
         if (marker.equals(markerHuesca)) {
             String id = "1";
             irACine(id);
@@ -129,9 +140,9 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, Google
         } else if (marker.equals(markerYelmo)) {
             String id = "6";
             irACine(id);
- //           Intent cine = new Intent (Mapa.this, Cines.class);
-   //         cine.putExtra("id", 6);
-     //       startActivity(cine);
+        } else if (marker.equals(markerPalafox)) {
+            String id = "7";
+            irACine(id);
         }
         return false;
     }

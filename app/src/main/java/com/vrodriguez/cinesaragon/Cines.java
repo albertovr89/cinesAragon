@@ -94,7 +94,7 @@ public class Cines extends AppCompatActivity {
                         });
                     }
                 });
-
+/*
                 //Exp pedir lista de imagenes
         OkHttpClient httpClient = new OkHttpClient();
         getPeliculas = new GetPeliculas(httpClient);
@@ -132,7 +132,7 @@ public class Cines extends AppCompatActivity {
                     }
                 });
             }
-        });
+        });*/
 
 
         }

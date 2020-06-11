@@ -2,4 +2,7 @@
     <string name="app_name">CinesAragon</string>
     <string name="title_activity_mapa">Map</string>
     <string name="google_maps_key">AIzaSyCaPpReyv-Iq9xdz6uUptwbFCkIepntztU</string>
+    <string name="inicia_sesi_n">INICIA SESIÓN</string>
+    <string name="nuevo_usuario">NUEVO USUARIO</string>
+    <string name="cines_cercanos">CINES CERCANOS</string>
 </resources>

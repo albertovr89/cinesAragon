@@ -1,81 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#7F1734"
-    tools:context=".MainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <ImageView
+        android:id="@+id/logoapp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/cines2"
+        android:scaleType="fitCenter" />
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="220dp"
-        android:layout_height="75dp"
-        android:background="@drawable/botonredondo"
-        android:drawableLeft="@drawable/acceso32"
-        android:fontFamily="sans-serif"
-        android:text="Inicia Sesión"
-        android:textAllCaps="false"
-        android:textSize="24sp" />
-
-    <ImageButton
-        android:id="@+id/registerbtn"
-        android:layout_width="300dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="11dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginBottom="10dp"
-        android:background="#a6828282" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Registrar nuevo Usuario"
-        android:textColor="@android:color/background_dark"
-        android:textSize="24sp" />
-
-    <ImageButton
         android:id="@+id/loginbtn"
-        android:layout_width="300dp"
-        android:layout_height="150dp"
-        android:layout_marginBottom="11dp"
-        android:background="#a6828282" />
+        android:layout_width="220dp"
+        android:layout_height="65dp"
+        android:layout_below="@id/logoapp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/boton2"
+        android:textColor="#ffffff"
+        android:fontFamily="sans-serif"
+        android:text="@string/inicia_sesi_n"
+        android:textAllCaps="false"
+        android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Iniciar Sesión"
-        android:textColor="@android:color/background_dark"
-        android:textSize="24sp" />
+    <Button
+        android:id="@+id/registerbtn"
+        android:layout_width="220dp"
+        android:layout_height="65dp"
+        android:background="@drawable/boton2"
+        android:textColor="#ffffff"
+        android:fontFamily="sans-serif"
+        android:text="@string/nuevo_usuario"
+        android:textAllCaps="false"
+        android:layout_below="@id/loginbtn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:textSize="20sp" />
 
-    <ImageButton
+    <Button
         android:id="@+id/cinesbtn"
-        android:layout_width="300dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginBottom="22dp"
-        android:background="#a6828282" />
+        android:layout_width="220dp"
+        android:layout_height="65dp"
+        android:background="@drawable/botonsinrelleno"
+        android:fontFamily="sans-serif"
+        android:text="@string/cines_cercanos"
+        android:textColor="#3C47EF"
+        android:textAllCaps="false"
+        android:layout_below="@id/registerbtn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="171dp"
-        android:layout_height="31dp"
-        android:layout_marginTop="140dp"
-        android:text="Nuestros cines"
-        android:textColor="@android:color/background_dark"
-        android:textSize="24sp" />
-</LinearLayout>
+
+</RelativeLayout>

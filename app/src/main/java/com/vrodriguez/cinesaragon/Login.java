@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -38,6 +39,11 @@ public class Login extends AppCompatActivity {
         usuariotxt = findViewById(R.id.usuariotxt);
         passtxt = findViewById(R.id.passtxt);
         Button btnlogin = findViewById(R.id.btnlogin);
+        Toolbar toolbar = findViewById(R.id.toolbarlogin);
+
+        //Acciones de la barra
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Login");
 
         OkHttpClient httpClient = new OkHttpClient();
         loginClient = new LoginClient(httpClient);
@@ -84,6 +90,7 @@ public class Login extends AppCompatActivity {
         });
 
     }
+
 
     protected void irAMenu(Persona p) {
         Intent logintent = new Intent(Login.this, Menu.class);

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
 
 import com.vrodriguez.cinesaragon.apis.RegisterClient;
 import com.vrodriguez.cinesaragon.modelos.Persona;
@@ -47,6 +48,10 @@ public class Registro extends AppCompatActivity  {
         fecha = findViewById(R.id.fechatxt);
         tarjeta = findViewById(R.id.tarjetatxt);
         btnregistro = findViewById(R.id.btnregistro);
+
+        Toolbar toolbar = findViewById(R.id.toolbarregistro);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Registro");
 
 
         OkHttpClient httpClient = new OkHttpClient();

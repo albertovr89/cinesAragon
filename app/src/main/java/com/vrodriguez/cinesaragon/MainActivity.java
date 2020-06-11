@@ -5,7 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.Button;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -14,9 +15,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ImageButton loginbtn = findViewById(R.id.loginbtn);
-        ImageButton registerbtn = findViewById(R.id.registerbtn);
-        ImageButton cinesbtn = findViewById(R.id.cinesbtn);
+        Button loginbtn = findViewById(R.id.loginbtn);
+        Button registerbtn = findViewById(R.id.registerbtn);
+        Button cinesbtn = findViewById(R.id.cinesbtn);
         loginbtn.setOnClickListener(this);
         registerbtn.setOnClickListener(this);
         cinesbtn.setOnClickListener(this);
