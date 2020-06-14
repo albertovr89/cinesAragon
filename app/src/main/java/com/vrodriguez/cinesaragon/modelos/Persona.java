@@ -8,19 +8,6 @@ import java.util.ArrayList;
 
 @Parcel
 public class Persona {
-    /*
-    {
-      "id": "1",
-      "usuario": "alberto",
-      "nombre": "",
-      "apellidos": "",
-      "telefono": "954334432",
-      "correo": "aksj@gmail.com",
-      "fecha": "0000-00-00",
-      "tarjeta": "12485796",
-      "ok": true
-    }
-    */
      Long id;
      String usuario;
      String pass;

@@ -11,7 +11,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.vrodriguez.cinesaragon.apis.GetClient;
-import com.vrodriguez.cinesaragon.apis.LoginClient;
 import com.vrodriguez.cinesaragon.apis.UpdateClient;
 import com.vrodriguez.cinesaragon.modelos.Persona;
 
@@ -23,7 +22,6 @@ import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.OkHttpClient;
 import okhttp3.Response;
 
 public class Ajustes extends AppCompatActivity {
@@ -34,6 +32,12 @@ public class Ajustes extends AppCompatActivity {
     private UpdateClient updateClient;
     private CinesAragonApplication application;
     Persona usuariologeado;
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +52,12 @@ public class Ajustes extends AppCompatActivity {
         mail = findViewById(R.id.mailpersonal);
         fecha = findViewById(R.id.fechapersonal);
         tarjeta = findViewById(R.id.tarjetapersonal);
+
         Toolbar toolbar = findViewById(R.id.toolbarajustes);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Área personal");
+
+
         Button btnactualizar = findViewById(R.id.btnactualizar);
 
 

@@ -38,8 +38,15 @@ public class Cartelera extends AppCompatActivity {
     GetPeliculas getPeliculas;
     ArrayList<Pelicula> peliculas;
     PelisAdapter adapter;
+    private CinesAragonApplication application;
     private final String TODOS = "Todas";
     String[] generos = {TODOS, "Drama", "Terror", "Ciencia ficción", "Anime", "Animación"};
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +55,8 @@ public class Cartelera extends AppCompatActivity {
 
         RecyclerView rvpeliculas = findViewById(R.id.rvpeliculas);
 
-        OkHttpClient httpClient = new OkHttpClient();
-        getPeliculas = new GetPeliculas(httpClient);
+        application = (CinesAragonApplication )getApplication();
+        getPeliculas = new GetPeliculas(application.getHttpClient());
 
         peliculas = new ArrayList<Pelicula>();
         adapter = new PelisAdapter(this, peliculas);

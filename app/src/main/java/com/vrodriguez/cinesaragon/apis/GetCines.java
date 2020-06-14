@@ -20,10 +20,14 @@ public class GetCines {
     public void pedirCines(String tabla, String id, Callback cb) {
         OkHttpClient client = new OkHttpClient();
 
-        RequestBody formBody = new FormBody.Builder()
-                .add("objeto", tabla)
-                .add("id", id)
-                .build();
+        FormBody.Builder bodyBuilder = new FormBody.Builder()
+                .add("objeto", tabla);
+
+        if (!id.isEmpty()) {
+            bodyBuilder.add("id", id);
+        }
+
+        RequestBody formBody = bodyBuilder.build();
 
         Request request = new Request.Builder()
                 .url(Configuracion.SERVIDOR + Configuracion.FUNCION_EXTRAER)

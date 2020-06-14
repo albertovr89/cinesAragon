@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,21 +8,144 @@
     tools:context=".DetallePeli">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbarpeli"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
+        android:theme="?attr/actionBarTheme"
+        app:navigationIcon="?attr/homeAsUpIndicator">
 
-    <TextView
-        android:id="@+id/titulotxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
+        <TextView
+            android:id="@+id/nombrepelitoolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </androidx.appcompat.widget.Toolbar>
 
-    <VideoView
-        android:id="@+id/videoView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-</LinearLayout>
+            <VideoView
+                android:id="@+id/trailer"
+                android:layout_width="match_parent"
+                android:layout_below="@id/toolbarpeli"
+                android:layout_height="175dp"
+                android:layout_marginBottom="10dp" />
+
+            <TextView
+                android:id="@+id/clasitxt"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/trailer"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/estrellastxt"
+                android:text="TextView" />
+
+            <ImageView
+                android:id="@+id/icongenero"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/generotxt"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="5dp"
+                app:srcCompat="@drawable/internet" />
+
+            <TextView
+                android:id="@+id/generotxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/clasitxt"
+                android:layout_toRightOf="@id/icongenero"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/sinopsis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/generotxt"
+                android:layout_marginLeft="20dp"
+                android:text="Sinopsis"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/sinopsistxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sinopsis"
+                android:layout_marginLeft="20dp"
+                android:text="TextView" />
+
+            <ImageView
+                android:id="@+id/iconduracion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/duraciontxt"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="5dp"
+                app:srcCompat="@drawable/internet" />
+
+            <TextView
+                android:id="@+id/duraciontxt"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/trailer"
+                android:layout_toRightOf="@id/iconduracion"
+                android:text="TextView" />
+
+            <ImageView
+                android:id="@+id/iconimdb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/estrellastxt"
+                android:layout_marginRight="5dp"
+                android:layout_toRightOf="@id/duraciontxt"
+                app:srcCompat="@drawable/internet" />
+
+            <TextView
+                android:id="@+id/estrellastxt"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/trailer"
+                android:layout_toRightOf="@id/iconimdb"
+                android:text="TextView" />
+
+            <HorizontalScrollView
+                android:id="@+id/scrollfoto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/sinopsistxt"
+                android:layout_marginTop="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/foto1"
+                        android:layout_width="300dp"
+                        android:layout_height="200dp"
+                        android:layout_marginLeft="20dp" />
+
+                    <ImageView
+                        android:id="@+id/foto2"
+                        android:layout_width="300dp"
+                        android:layout_height="200dp"
+                        android:layout_marginLeft="20dp" />
+
+                    <ImageView
+                        android:id="@+id/foto3"
+                        android:layout_width="300dp"
+                        android:layout_height="200dp"
+                        android:layout_marginLeft="20dp" />
+
+                    <ImageView
+                        android:id="@+id/foto4"
+                        android:layout_width="300dp"
+                        android:layout_height="200dp"
+                        android:layout_marginLeft="20dp" />
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+</RelativeLayout>

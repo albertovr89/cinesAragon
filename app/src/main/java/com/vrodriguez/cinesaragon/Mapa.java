@@ -32,6 +32,12 @@ public class Mapa extends AppCompatActivity implements OnMapReadyCallback, Googl
     private Marker markerHuesca, markerTeruel, markerVenecia, markerAragonia, markerCasa, markerYelmo, markerPalafox;
 
     @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mapa);

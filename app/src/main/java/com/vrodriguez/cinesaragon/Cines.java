@@ -43,7 +43,13 @@ public class Cines extends AppCompatActivity {
     private GetCines getCines;
     private GetPeliculas getPeliculas;
     private Context context;
+    private CinesAragonApplication application;
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +66,8 @@ public class Cines extends AppCompatActivity {
         RecyclerView rvportadas = findViewById(R.id.rvportadas);
         portadasAdapter = new PortadasAdapter(this, peliculas);
 
+        application = (CinesAragonApplication )getApplication();
+
         rvportadas.setAdapter(portadasAdapter);
         rvportadas.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
@@ -71,8 +79,7 @@ public class Cines extends AppCompatActivity {
         Bundle cine = this.getIntent().getExtras();
         String idCine = cine.getString("id");
 
-        OkHttpClient httpClient = new OkHttpClient();
-        getCines = new GetCines(httpClient);
+        getCines = new GetCines(application.getHttpClient());
         String tabla = "cines";
 
         getCines.pedirCines(tabla, idCine, new Callback() {
@@ -113,8 +120,7 @@ public class Cines extends AppCompatActivity {
             }
         });
 
-        //Exp pedir lista de imagenes
-        getPeliculas = new GetPeliculas(httpClient);
+        getPeliculas = new GetPeliculas(application.getHttpClient());
 
         getPeliculas.pedirPelisDeCine(idCine, new Callback() {
             @Override

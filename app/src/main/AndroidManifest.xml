@@ -12,9 +12,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name=".CinesAragonApplication">
@@ -27,7 +27,6 @@
         <activity android:name=".Ajustes" />
         <activity android:name=".DetallePeli" />
         <activity android:name=".Cartelera" />
-        <activity android:name=".Menu" />
         <activity android:name=".Cines" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

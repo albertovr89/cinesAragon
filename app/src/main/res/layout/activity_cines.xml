@@ -53,7 +53,7 @@
     <TextView
         android:id="@+id/direccioncine"
         android:layout_width="match_parent"
-        android:layout_height="25dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/bloque"
         android:layout_toRightOf="@id/marcador"
         android:text="TextView" />
@@ -71,7 +71,7 @@
         android:id="@+id/telefonocine"
         android:layout_width="match_parent"
         android:layout_toRightOf="@id/icontlf"
-        android:layout_height="25dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/direccioncine"
         android:text="TextView" />
 
@@ -87,7 +87,7 @@
     <TextView
         android:id="@+id/mailcine"
         android:layout_width="match_parent"
-        android:layout_height="25dp"
+        android:layout_height="wrap_content"
         android:layout_toRightOf="@id/iconmail"
         android:layout_below="@id/telefonocine"
         android:text="TextView" />
@@ -104,7 +104,7 @@
     <TextView
         android:id="@+id/webcine"
         android:layout_width="match_parent"
-        android:layout_height="25dp"
+        android:layout_height="wrap_content"
         android:layout_toRightOf="@id/iconweb"
         android:layout_below="@id/mailcine"
         android:autoLink="web"

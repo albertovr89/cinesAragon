@@ -2,10 +2,11 @@ package com.vrodriguez.cinesaragon;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
@@ -15,17 +16,15 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.navigation.ui.AppBarConfiguration;
+
 
 import com.google.android.material.navigation.NavigationView;
 import com.vrodriguez.cinesaragon.modelos.Persona;
 
-import org.parceler.Parcels;
 
 public class MenuyCines extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     TextView usernametxt;
-    String idPersona;
     private DrawerLayout drawer;
     private NavigationView navigationView;
     private CinesAragonApplication application;
@@ -102,16 +101,6 @@ public class MenuyCines extends AppCompatActivity implements NavigationView.OnNa
         }
         return true;
     }
-/*
-    @Override
-    public boolean onCreateOptionsMenu (Menu menu){
-        if(!drawer.isDrawerOpen(GravityCompat.START)) {
-            getMenuInflater().inflate(R.menu.activity_main_drawer, (android.view.Menu) menu);
-            return true;
-        }
-        return super.onCreateOptionsMenu((android.view.Menu) menu);
-    }
-*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
@@ -127,7 +116,7 @@ public class MenuyCines extends AppCompatActivity implements NavigationView.OnNa
 
 
     private void setToolbar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarmenudrawer);
         setSupportActionBar(toolbar);
         final ActionBar ab = getSupportActionBar();
         if (ab != null) {

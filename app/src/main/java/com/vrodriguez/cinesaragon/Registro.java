@@ -11,20 +11,17 @@ import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 
-import com.vrodriguez.cinesaragon.apis.LoginClient;
 import com.vrodriguez.cinesaragon.apis.RegisterClient;
 import com.vrodriguez.cinesaragon.modelos.Persona;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.parceler.Parcels;
 
 import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.OkHttpClient;
 import okhttp3.Response;
 
 
@@ -116,7 +113,7 @@ public class Registro extends AppCompatActivity  {
     }
 
     protected void irAMenu() {
-        Intent regintent = new Intent(Registro.this, Menu.class);
+        Intent regintent = new Intent(Registro.this, MenuyCines.class);
         startActivityForResult(regintent, 0);
     }
 

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/fotocinelista"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:adjustViewBounds="true"
+        android:maxWidth="150dp"
+        android:maxHeight="300dp"
+        android:scaleType="fitCenter" />
+
+    <TextView
+        android:id="@+id/nombrecine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/fotocinelista"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="Titulo"
+        android:textColor="#242c86"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+</RelativeLayout>
