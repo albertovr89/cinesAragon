@@ -8,7 +8,7 @@
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -16,8 +16,16 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".DetallePeli"></activity>
+        android:theme="@style/AppTheme"
+        android:name=".CinesAragonApplication">
+        <activity android:name=".Entradas"></activity>
+        <activity android:name=".ListadeCines" />
+        <activity
+            android:name=".MenuyCines"
+            android:label="@string/title_activity_menuy_cines"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Ajustes" />
+        <activity android:name=".DetallePeli" />
         <activity android:name=".Cartelera" />
         <activity android:name=".Menu" />
         <activity android:name=".Cines" />
@@ -38,14 +46,9 @@
 
         <activity
             android:name=".Mapa"
-            android:parentActivityName=".MainActivity"
             android:label="@string/title_activity_mapa" />
-        <activity
-            android:name=".Registro"
-            android:parentActivityName=".MainActivity"/>
-        <activity
-            android:name=".Login"
-            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".Registro" />
+        <activity android:name=".Login" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

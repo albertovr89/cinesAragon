@@ -17,12 +17,17 @@ public class GetPeliculas {
     }
 
 
-    public void pedirPelis(String tabla, Callback cb) {
+    public void pedirPelis(String tabla, String genero, Callback cb) {
         OkHttpClient client = new OkHttpClient();
 
-        RequestBody formBody = new FormBody.Builder()
-                .add("objeto", tabla)
-                .build();
+        FormBody.Builder bodyBuilder = new FormBody.Builder()
+                .add("objeto", tabla);
+
+        if (!genero.isEmpty()) {
+            bodyBuilder.add("genero", genero);
+        }
+
+        RequestBody formBody = bodyBuilder.build();
 
         Request request = new Request.Builder()
                 .url(Configuracion.SERVIDOR + Configuracion.FUNCION_EXTRAER)
@@ -32,7 +37,7 @@ public class GetPeliculas {
         client.newCall(request).enqueue(cb);
     }
 
-    public void pedirPelis2(String idCine, Callback cb) {
+    public void pedirPelisDeCine(String idCine, Callback cb) {
         OkHttpClient client = new OkHttpClient();
 
         RequestBody formBody = new FormBody.Builder()

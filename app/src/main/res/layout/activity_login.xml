@@ -11,20 +11,19 @@
         android:id="@+id/toolbarlogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#3C47EF"
+        android:background="#242c86"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:navigationIcon="?attr/homeAsUpIndicator"
         app:title="Login" />
 
-
     <ImageView
         android:id="@+id/loginimagen"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/toolbarlogin"
-        android:layout_marginTop="50dp"
-        app:srcCompat="@drawable/cines2" />
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="80dp"
+        app:srcCompat="@drawable/bannerlogo" />
 
     <EditText
         android:id="@+id/usuariotxt"

@@ -14,7 +14,8 @@ import org.parceler.Parcels;
 
 public class Menu extends AppCompatActivity implements View.OnClickListener {
 
-    Button btncartelera;
+    Button btncartelera, btnareapersonal;
+    String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,9 +24,12 @@ public class Menu extends AppCompatActivity implements View.OnClickListener {
 
         Persona persona = (Persona) Parcels.unwrap(getIntent().getParcelableExtra("persona"));
         Toast.makeText(getApplicationContext(), "Hola " + persona.getUsuario(), Toast.LENGTH_SHORT).show();
+        id = persona.getId().toString();
 
         btncartelera = findViewById(R.id.btncartelera);
+        btnareapersonal = findViewById(R.id.btnareapersonal);
         btncartelera.setOnClickListener(this);
+        btnareapersonal.setOnClickListener(this);
     }
 
     @Override
@@ -36,6 +40,11 @@ public class Menu extends AppCompatActivity implements View.OnClickListener {
                 Intent carteleraIntent = new Intent(Menu.this, Cartelera.class);
                 startActivityForResult(carteleraIntent, 0);
                 break;
+
+            case R.id.btnareapersonal:
+                Intent areaintent = new Intent(Menu.this, Ajustes.class);
+                areaintent.putExtra("id", id);
+                startActivityForResult(areaintent,0);
 
         }
     }

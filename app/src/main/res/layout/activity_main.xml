@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -13,13 +14,12 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="80dp"
-        android:background="@drawable/cines2"
-        android:scaleType="fitCenter" />
+        app:srcCompat="@drawable/bannerlogo" />
 
     <Button
         android:id="@+id/loginbtn"
         android:layout_width="220dp"
-        android:layout_height="65dp"
+        android:layout_height="50dp"
         android:layout_below="@id/logoapp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="60dp"
@@ -33,7 +33,7 @@
     <Button
         android:id="@+id/registerbtn"
         android:layout_width="220dp"
-        android:layout_height="65dp"
+        android:layout_height="50dp"
         android:background="@drawable/boton2"
         android:textColor="#ffffff"
         android:fontFamily="sans-serif"
@@ -47,11 +47,11 @@
     <Button
         android:id="@+id/cinesbtn"
         android:layout_width="220dp"
-        android:layout_height="65dp"
+        android:layout_height="50dp"
         android:background="@drawable/botonsinrelleno"
         android:fontFamily="sans-serif"
         android:text="@string/cines_cercanos"
-        android:textColor="#3C47EF"
+        android:textColor="#242c86"
         android:textAllCaps="false"
         android:layout_below="@id/registerbtn"
         android:layout_centerHorizontal="true"

@@ -3,24 +3,28 @@ package com.vrodriguez.cinesaragon.modelos;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+@Parcel
 public class Pelicula {
 
-    long id;
-    String titulo;
-    String sinopsis;
-    String genero;
-    String clasi;
-    long estrellas;
-    String imagen;
-    String sesion1;
-    String sesion2;
-    String sesion3;
-    String sesion4;
-    boolean ok;
+    public long id;
+    public String titulo;
+    public String sinopsis;
+    public String genero;
+    public String clasi;
+    public long estrellas;
+    public String imagen;
+    public String sesion1;
+    public String sesion2;
+    public String sesion3;
+    public String sesion4;
+    public boolean ok;
+
+    public Pelicula() {}
 
     public Pelicula(long id, String titulo, String sinopsis, String imagen, String genero, String clasi, Long estrellas, String sesion1, String sesion2, String sesion3, String sesion4) {
         this.id = id;

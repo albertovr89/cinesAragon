@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 
+import com.vrodriguez.cinesaragon.apis.LoginClient;
 import com.vrodriguez.cinesaragon.apis.RegisterClient;
 import com.vrodriguez.cinesaragon.modelos.Persona;
 
@@ -32,7 +33,14 @@ public class Registro extends AppCompatActivity  {
     EditText usuario, contrasena, nombre, apellidos, telefono, correo, fecha,  tarjeta;
     Button btnregistro;
     private RegisterClient registerClient;
+    private CinesAragonApplication application;
 
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +61,9 @@ public class Registro extends AppCompatActivity  {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Registro");
 
+        application = (CinesAragonApplication )getApplication();
+        registerClient = new RegisterClient(application.getHttpClient());
 
-        OkHttpClient httpClient = new OkHttpClient();
-        registerClient = new RegisterClient(httpClient);
 
         btnregistro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,8 +95,9 @@ public class Registro extends AppCompatActivity  {
                                 try {
                                     JSONObject json = new JSONObject(miRespuesta);
                                     Persona p = Persona.fromJSON(json);
+                                    application.setUsuarioLogueado(p);
                                     vaciarCampos();
-                                    irAMenu(p);
+                                    irAMenu();
                                 } catch (IllegalArgumentException error) {
                                     Toast.makeText(getApplicationContext(), "Error:" + error.getMessage(), Toast.LENGTH_SHORT).show();
                                 } catch (JSONException e) {
@@ -106,9 +115,8 @@ public class Registro extends AppCompatActivity  {
 
     }
 
-    protected void irAMenu(Persona p) {
+    protected void irAMenu() {
         Intent regintent = new Intent(Registro.this, Menu.class);
-        regintent.putExtra("persona", Parcels.wrap(p));
         startActivityForResult(regintent, 0);
     }
 

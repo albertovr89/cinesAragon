@@ -11,13 +11,17 @@
         android:id="@+id/carteleratoolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
+        android:background="@color/fondoToolbar"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" >
+        android:theme="?attr/actionBarTheme"
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        app:title="Cartelera">
 
-        <Spinner android:id="@+id/filtroToolbar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+    <Spinner
+        android:id="@+id/filtroToolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
 
     </androidx.appcompat.widget.Toolbar>
 

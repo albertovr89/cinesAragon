@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_cines"
+            android:icon="@drawable/cinesdrawer"
+            android:title="@string/nav_cines" />
+        <item
+            android:id="@+id/nav_cartelera"
+            android:icon="@drawable/carteleradrawer"
+            android:title="@string/nav_cartelera" />
+        <item
+            android:id="@+id/nav_entradas"
+            android:icon="@drawable/entradasdrawer"
+            android:title="@string/nav_entradas" />
+    </group>
+    <item android:title="Ajustes">
+        <menu>
+            <item
+                android:id="@+id/nav_personal"
+                android:icon="@drawable/userdrawer"
+                android:title="@string/nav_personal"/>
+
+            <item
+                android:id="@+id/nav_exit"
+                android:icon="@drawable/outdrawer"
+                android:title="@string/nav_exit"/>
+
+        </menu>
+
+    </item>
+</menu>

@@ -30,6 +30,7 @@ public class Login extends AppCompatActivity {
 
     private LoginClient loginClient;
     private EditText usuariotxt, passtxt;
+    private CinesAragonApplication application;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +46,8 @@ public class Login extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Login");
 
-        OkHttpClient httpClient = new OkHttpClient();
-        loginClient = new LoginClient(httpClient);
+        application = (CinesAragonApplication )getApplication();
+        loginClient = new LoginClient(application.getHttpClient());
 
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +74,8 @@ public class Login extends AppCompatActivity {
                                     JSONObject json = new JSONObject(miRespuesta);
                                     Persona p = Persona.fromJSON(json);
 
-                                    irAMenu(p);
+                                    application.setUsuarioLogueado(p);
+                                    irAMenu();
                                 } catch (IllegalArgumentException error) {
                                     Toast.makeText(getApplicationContext(), "Error:" + error.getMessage(), Toast.LENGTH_SHORT).show();
                                 } catch (JSONException e) {
@@ -92,9 +94,8 @@ public class Login extends AppCompatActivity {
     }
 
 
-    protected void irAMenu(Persona p) {
-        Intent logintent = new Intent(Login.this, Menu.class);
-        logintent.putExtra("persona", Parcels.wrap(p));
+    protected void irAMenu() {
+        Intent logintent = new Intent(Login.this, MenuyCines.class);
         startActivityForResult(logintent, 0);
     }
 }

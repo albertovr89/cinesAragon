@@ -1,146 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".Cines"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".Cines">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbarcines"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
+        android:background="#242c86"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
+        android:theme="?attr/actionBarTheme"
+        app:navigationIcon="?attr/homeAsUpIndicator">
+             <TextView
+                 android:id="@+id/nombrecinetoolbar"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:textSize="20sp"
+                 android:textStyle="bold"
+                 android:textColor="#ffffff" />
 
-        <ImageView
-            android:id="@+id/fotoCine"
-            android:layout_width="match_parent"
-            android:layout_height="200dp" />
+    </androidx.appcompat.widget.Toolbar>
 
-        <TextView
-            android:id="@+id/titulotxt"
-            android:layout_width="match_parent"
-            android:layout_height="25dp" />
+    <ImageView
+        android:id="@+id/fotoCine"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@id/toolbarcines"/>
 
-        <TextView
-            android:id="@+id/direccion"
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:text="TextView" />
+    <TextView
+        android:id="@+id/bloque"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_below="@id/fotoCine"
+        android:layout_marginLeft="10dp"
+        android:text="Datos de contacto:"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/telefono"
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:text="TextView" />
+    <ImageView
+        android:id="@+id/marcador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bloque"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="5dp"
+        app:srcCompat="@drawable/alfiler" />
 
-        <TextView
-            android:id="@+id/mail"
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:text="TextView" />
+    <TextView
+        android:id="@+id/direccioncine"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_below="@id/bloque"
+        android:layout_toRightOf="@id/marcador"
+        android:text="TextView" />
 
-        <TextView
-            android:id="@+id/web"
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:text="TextView" />
+    <ImageView
+        android:id="@+id/icontlf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/telefonocine"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="5dp"
+        app:srcCompat="@drawable/telefono" />
 
-        <TextView
-            android:id="@+id/cartelera"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:text="cartelera" />
+    <TextView
+        android:id="@+id/telefonocine"
+        android:layout_width="match_parent"
+        android:layout_toRightOf="@id/icontlf"
+        android:layout_height="25dp"
+        android:layout_below="@id/direccioncine"
+        android:text="TextView" />
+
+    <ImageView
+        android:id="@+id/iconmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/mailcine"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="5dp"
+        app:srcCompat="@drawable/correo" />
+
+    <TextView
+        android:id="@+id/mailcine"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_toRightOf="@id/iconmail"
+        android:layout_below="@id/telefonocine"
+        android:text="TextView" />
+
+    <ImageView
+        android:id="@+id/iconweb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/webcine"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="5dp"
+        app:srcCompat="@drawable/internet" />
+
+    <TextView
+        android:id="@+id/webcine"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_toRightOf="@id/iconweb"
+        android:layout_below="@id/mailcine"
+        android:autoLink="web"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/carteleracine"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_height="25dp"
+        android:layout_below="@id/webcine"
+        android:text="Cartelera:"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvportadas"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_below="@id/carteleracine"/>
 
-    <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
 
-                <TableLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <ImageView
-                            android:id="@+id/peli1"
-                            android:layout_width="175dp"
-                            android:layout_height="175dp"
-                            app:srcCompat="@drawable/cines2" />
-
-                        <ImageView
-                            android:id="@+id/peli2"
-                            android:layout_width="175dp"
-                            android:layout_height="175dp"
-                            app:srcCompat="@drawable/cines2" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <ImageView
-                            android:id="@+id/peli3"
-                            android:layout_width="175dp"
-                            android:layout_height="175dp"
-                            app:srcCompat="@drawable/cines2" />
-
-                        <ImageView
-                            android:id="@+id/peli4"
-                            android:layout_width="175dp"
-                            android:layout_height="175dp"
-                            app:srcCompat="@drawable/cines2" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <ImageView
-                            android:id="@+id/peli5"
-                            android:layout_width="175dp"
-                            android:layout_height="175dp"
-                            app:srcCompat="@drawable/cines2" />
-
-                        <ImageView
-                            android:id="@+id/peli6"
-                            android:layout_width="175dp"
-                            android:layout_height="175dp"
-                            app:srcCompat="@drawable/cines2" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <ImageView
-                            android:id="@+id/peli7"
-                            android:layout_width="175dp"
-                            android:layout_height="175dp"
-                            app:srcCompat="@drawable/cines2" />
-
-                        <ImageView
-                            android:id="@+id/peli8"
-                            android:layout_width="175dp"
-                            android:layout_height="175dp"
-                            app:srcCompat="@drawable/cines2" />
-                    </TableRow>
-                </TableLayout>
-            </LinearLayout>
-        </ScrollView>
-</LinearLayout>
+</RelativeLayout>

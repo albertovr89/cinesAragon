@@ -21,21 +21,23 @@ public class Persona {
       "ok": true
     }
     */
-    private Long id;
-    private String usuario;
-    private String nombre;
-    private String apellidos;
-    private String telefono;
-    private String tarjeta;
-    private String correo;
-    private String fecha;
-    private boolean ok;
+     Long id;
+     String usuario;
+     String pass;
+     String nombre;
+     String apellidos;
+     String telefono;
+     String tarjeta;
+     String correo;
+     String fecha;
+     boolean ok;
 
     public Persona() {}
 
-    public Persona(Long id, String usuario, String nombre, String apellidos, String telefono, String tarjeta, String correo, String fecha) {
+    public Persona(Long id, String usuario, String pass, String nombre, String apellidos, String telefono, String tarjeta, String correo, String fecha) {
         this.id = id;
         this.usuario = usuario;
+        this.pass = pass;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.telefono = telefono;
@@ -59,6 +61,10 @@ public class Persona {
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
+
+    public String getPass() {return pass;}
+
+    public void setPass(String pass) {this.pass = pass;}
 
     public String getNombre() {
         return nombre;
@@ -117,6 +123,7 @@ public class Persona {
         return new Persona(
                 json.getLong("id"),
                 json.getString("usuario"),
+                "",
                 json.getString("nombre"),
                 json.getString("apellidos"),
                 json.getString("telefono"),

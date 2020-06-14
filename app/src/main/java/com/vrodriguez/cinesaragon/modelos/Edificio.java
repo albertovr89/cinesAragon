@@ -25,32 +25,34 @@ public class Edificio {
     "ok": true
 }
  */
-    private Long id;
-    private String nombre;
-    private String direccion;
-    private String telefono;
-    private String correo;
-    private String peli1;
-    private String peli2;
-    private String peli3;
-    private String peli4;
-    private String peli5;
-    private String peli6;
-    private String peli7;
-    private String peli8;
-    private String imagen;
-    private boolean ok;
+     Long id;
+     String nombre;
+     String direccion;
+     String telefono;
+     String correo;
+     String web;
+     String peli1;
+     String peli2;
+     String peli3;
+     String peli4;
+     String peli5;
+     String peli6;
+     String peli7;
+     String peli8;
+     String imagen;
+     boolean ok;
 
 
     public Edificio() {
     }
 
-    public Edificio(long id, String nombre, String direccion, String telefono, String correo, String peli1, String peli2, String peli3, String peli4, String peli5, String peli6, String peli7, String peli8, String imagen) {
+    public Edificio(long id, String nombre, String direccion, String telefono, String correo, String web, String peli1, String peli2, String peli3, String peli4, String peli5, String peli6, String peli7, String peli8, String imagen) {
         this.id = id;
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
         this.correo = correo;
+        this.web = web;
         this.peli1 = peli1;
         this.peli2 = peli2;
         this.peli3 = peli3;
@@ -97,6 +99,10 @@ public class Edificio {
     public String getCorreo() {
         return correo;
     }
+
+    public String getWeb() { return web; }
+
+    public void setWeb(String web) { this.web = web; }
 
     public void setCorreo(String correo) {
         this.correo = correo;
@@ -150,9 +156,7 @@ public class Edificio {
         this.peli6 = peli6;
     }
 
-    public String getPeli7() {
-        return peli7;
-    }
+    public String getPeli7() { return peli7; }
 
     public void setPeli7(String peli7) {
         this.peli7 = peli7;
@@ -186,6 +190,7 @@ public class Edificio {
                 json.getString("direccion"),
                 json.getString("telefono"),
                 json.getString("correo"),
+                json.getString("web"),
                 json.getString("peli1"),
                 json.getString("peli2"),
                 json.getString("peli3"),

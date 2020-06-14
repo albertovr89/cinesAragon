@@ -1,22 +1,23 @@
 package com.vrodriguez.cinesaragon;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Context;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.squareup.picasso.Picasso;
+import com.vrodriguez.cinesaragon.adaptadores.PelisAdapter;
+import com.vrodriguez.cinesaragon.adaptadores.PortadasAdapter;
 import com.vrodriguez.cinesaragon.apis.GetCines;
 import com.vrodriguez.cinesaragon.apis.GetPeliculas;
-import com.vrodriguez.cinesaragon.apis.LoginClient;
 import com.vrodriguez.cinesaragon.modelos.Edificio;
 import com.vrodriguez.cinesaragon.modelos.Pelicula;
-import com.vrodriguez.cinesaragon.modelos.Persona;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
@@ -33,8 +34,12 @@ import okhttp3.Response;
 
 public class Cines extends AppCompatActivity {
 
-    TextView titulo, direccion, telefono, mail, web;
+    TextView direccion, telefono, mail, web, nombre;
     ImageView fotocine;
+
+    private ArrayList<Pelicula> peliculas;
+    private PortadasAdapter portadasAdapter;
+
     private GetCines getCines;
     private GetPeliculas getPeliculas;
     private Context context;
@@ -45,61 +50,32 @@ public class Cines extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cines);
 
-        titulo = (TextView) findViewById(R.id.titulotxt);
+        peliculas = new ArrayList<>();
         fotocine = (ImageView) findViewById(R.id.fotoCine);
-        direccion = (TextView) findViewById(R.id.direccion);
-       RecyclerView rvportadas = findViewById(R.id.rvportadas);
+        direccion = (TextView) findViewById(R.id.direccioncine);
+        telefono = findViewById(R.id.telefonocine);
+        mail = findViewById(R.id.mailcine);
+        web = findViewById(R.id.webcine);
+        nombre = findViewById(R.id.nombrecinetoolbar);
+        RecyclerView rvportadas = findViewById(R.id.rvportadas);
+        portadasAdapter = new PortadasAdapter(this, peliculas);
+
+        rvportadas.setAdapter(portadasAdapter);
+        rvportadas.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
 
+        Toolbar toolbar = findViewById(R.id.toolbarcines);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
 
         Bundle cine = this.getIntent().getExtras();
         String idCine = cine.getString("id");
-//      Toast.makeText(getApplicationContext(), "Hola " + idCine, Toast.LENGTH_SHORT).show();
 
         OkHttpClient httpClient = new OkHttpClient();
         getCines = new GetCines(httpClient);
         String tabla = "cines";
 
-                getCines.pedirCines(tabla, idCine, new Callback() {
-                    @Override
-                    public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                        call.cancel();
-                    }
-
-                    @Override
-                    public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-
-                        final String miRespuesta = response.body().string();
-
-                        Cines.this.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    JSONObject json = new JSONObject(miRespuesta);
-                                    Edificio c = Edificio.fromJSON(json);
-                                    titulo.setText(c.getNombre());
-                                    direccion.setText(c.getImagen());
-                                    Picasso.get()
-                                            .load(c.getImagen()).fit().centerCrop()
-                                            .error(R.drawable.cines2)
-                                            .into(fotocine);
-
-
-                                } catch (IllegalArgumentException error) {
-                                    Toast.makeText(getApplicationContext(), "Error:" + error.getMessage(), Toast.LENGTH_SHORT).show();
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        });
-                    }
-                });
-/*
-                //Exp pedir lista de imagenes
-        OkHttpClient httpClient = new OkHttpClient();
-        getPeliculas = new GetPeliculas(httpClient);
-
-        getPeliculas.pedirPelis2(idCine, new Callback() {
+        getCines.pedirCines(tabla, idCine, new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
                 call.cancel();
@@ -115,14 +91,17 @@ public class Cines extends AppCompatActivity {
                     public void run() {
                         try {
                             JSONObject json = new JSONObject(miRespuesta);
-                            Pelicula pelicula = Pelicula.fromJSON(json);
-                            titulo.setText(c.getNombre());
-                            direccion.setText(c.getImagen());
+                            Edificio c = Edificio.fromJSON(json);
+                            nombre.setText(c.getNombre());
+                            direccion.setText(c.getDireccion());
+                            telefono.setText(c.getTelefono());
+                            mail.setText(c.getCorreo());
+                            web.setText(c.getWeb());
+
                             Picasso.get()
                                     .load(c.getImagen()).fit().centerCrop()
                                     .error(R.drawable.cines2)
                                     .into(fotocine);
-
 
                         } catch (IllegalArgumentException error) {
                             Toast.makeText(getApplicationContext(), "Error:" + error.getMessage(), Toast.LENGTH_SHORT).show();
@@ -132,9 +111,41 @@ public class Cines extends AppCompatActivity {
                     }
                 });
             }
-        });*/
+        });
+
+        //Exp pedir lista de imagenes
+        getPeliculas = new GetPeliculas(httpClient);
+
+        getPeliculas.pedirPelisDeCine(idCine, new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                call.cancel();
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+
+                final String miRespuesta = response.body().string();
+
+                Cines.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            JSONObject contenedor = new JSONObject(miRespuesta);
+                            peliculas.clear();
+                            peliculas.addAll(Pelicula.fromJSONArray(contenedor.getJSONArray("elementos")));
+                            portadasAdapter.notifyDataSetChanged();
+                        } catch (IllegalArgumentException error) {
+                            Toast.makeText(getApplicationContext(), "Error:" + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+        });
 
 
-        }
+    }
 
 }

@@ -21,15 +21,10 @@ import java.util.List;
 
 public class PelisAdapter extends RecyclerView.Adapter<PelisAdapter.ViewHolder> implements View.OnClickListener {
 
-    private ArrayList<Pelicula> persons;
-    private ArrayList<Pelicula> personsFilter;
+    private List<Pelicula> mPelicula;
     private Context context;
 
-//Recoger un click ???
     private View.OnClickListener listener;
-
-
-
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -46,7 +41,6 @@ public class PelisAdapter extends RecyclerView.Adapter<PelisAdapter.ViewHolder> 
         }
     }
 
-    private List<Pelicula> mPelicula;
     public PelisAdapter(Context context, List<Pelicula> peliculas) {
         this.mPelicula = peliculas;
         this.context = context;

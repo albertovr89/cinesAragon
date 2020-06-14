@@ -21,10 +21,8 @@ import java.util.List;
 
 public class PortadasAdapter extends RecyclerView.Adapter<PortadasAdapter.ViewHolder> {
 
-    private ArrayList<Pelicula> persons;
-    private ArrayList<Pelicula> personsFilter;
+    private List<Pelicula> mPelicula;
     private Context context;
-
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -37,7 +35,7 @@ public class PortadasAdapter extends RecyclerView.Adapter<PortadasAdapter.ViewHo
         }
     }
 
-    private List<Pelicula> mPelicula;
+
     public PortadasAdapter(Context context, List<Pelicula> peliculas) {
         this.mPelicula = peliculas;
         this.context = context;
@@ -62,12 +60,10 @@ public class PortadasAdapter extends RecyclerView.Adapter<PortadasAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull PortadasAdapter.ViewHolder viewHolder, int position) {
-
         final Pelicula pelicula = mPelicula.get(position);
 
         ImageView portada = viewHolder.cartelpeli;
         Picasso.get().load(pelicula.getImagen()).placeholder(R.drawable.cines2).into(portada);
-
     }
 
     @Override

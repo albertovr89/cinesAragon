@@ -5,4 +5,17 @@
     <string name="inicia_sesi_n">INICIA SESIÓN</string>
     <string name="nuevo_usuario">NUEVO USUARIO</string>
     <string name="cines_cercanos">CINES CERCANOS</string>
+    <string name="title_activity_menuy_cines">MenuyCines</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Cines Aragón</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="nav_cines">Cines</string>
+    <string name="nav_cartelera">Cartelera</string>
+    <string name="nav_entradas">Entradas</string>
+    <string name="nav_personal">Área personal</string>
+    <string name="nav_exit">Cerrar sesión</string>
 </resources>
